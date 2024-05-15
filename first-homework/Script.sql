@@ -13,7 +13,6 @@ create table student (
 select * from student s;
 
 
-
 --Adding data in student table
 insert into student(id,firstname,lastname,dateofbirth,enrolleddate,gender,nationalidnumber,studentcardnumber) 
 values
@@ -126,11 +125,14 @@ values
 (2,4,1,5,8,'2024-05-01');
 
 
-
 --Relations, grade-student relations
 
 alter table grade 
 add foreign key (studentId) references student(id);
+
+--To visit relation grade-student
+select * from grade
+inner join student on grade.studentid = student.id;
 
 --Relations, grade-teacher relations
 
@@ -151,5 +153,7 @@ add foreign key(gradeId) references grade(id);
 
 alter table gradedetalis 
 add foreign key(achivmenttypeid) references achivmentType(id);
+
+
 
 
