@@ -71,7 +71,7 @@ on s.id = sl.song_id;
 
 --Treba vaka da izgleda baranjevo ama bidejki vo skirptata nema relacija povrzana mejgu album i artist go ostaviv vaka
 
---select name as artist_name, a2.name as album_name from artist a 
+--select a."name" as artist_name, a2.name as album_name from artist a 
 --join album a2 
 --on a.id = a2.artist_id;
 
@@ -88,16 +88,22 @@ on a.id = ad.artist_id;
 --Task 6/6
 
 --List all song names with genre names
-select s."name"  as song_name, g.name from song s 
-cross join genre g;
+select s.name as song_name, g.name as genre_name from song s
+join songs_genres sg 
+on s.id = sg.song_id 
+join genre g 
+on g.id = g.id;
 --List all song names with playlist names
-select s."name"  as song_name, pl.title  from song s 
-cross join playlist pl;
+select s.name as song_name, p.title as playlist_title from song s
+join playlists_songs ps  
+on s.id = ps.song_id 
+join playlist p 
+on p.id = ps.playlist_id;
 --List all album names and rating that have rating above 4 with the artist name
 
 --Isto i tuka nema relacija zatoa ne mozi da se izvrsi taskot, ama go napisav kako treba da se izvrsi querito i go komentirav podolu
 
---select name as a2.album_name, a2.rating as album_rating, name as artist_name from artist a
+--select a2.name as album_name, a2.rating as album_rating, a.name as artist_name from artist a
 --join album a2 
 --on a.id = a2.artist_id
 --where a2.rating > 4;
@@ -107,17 +113,3 @@ select s."name" as song_name, a.name as artist_name from song s
 join artist a 
 on s.artist_id = a.id
 where s.explicit = true;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
